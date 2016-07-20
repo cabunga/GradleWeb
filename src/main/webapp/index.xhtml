@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<body>
+<h3><h:outputText value="mensajes para ver" /></h3>
+<h:form>
+    <h:panelGrid id="grid" columns="3" cellpadding="2">
+        <p:outputLabel for="idusuario" value="Usuarrio:" />
+        <p:inputText id="idusuario" required="true" />
+        <p:message for="idusuario" />
+ 
+        <p:outputLabel for="idpass" value="Password:" />
+        <p:inputText id="idpass" required="true"/>
+        <p:message for="idpass" display="Password"/>
+ 
+     </h:panelGrid>
+ 
+    <p:commandButton id="submitButton" value="Submit" />
+</h:form>
+</body>
+</html>
