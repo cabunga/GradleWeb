@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.cuentas.banca.dao.Cliente;
+
 /**
  * @author USUARIO
  *
@@ -25,7 +27,7 @@ public class Administrar implements Serializable {
 	private String cuentaDestino;
 	private String valorActual;
 	private String valorRetiro;
-
+	Cliente cliente;
 	public void transferir() {
 		FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Transaccion realizada con exito."));
 	}
