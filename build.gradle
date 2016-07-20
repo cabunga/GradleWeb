@@ -33,3 +33,11 @@ war {
 	archiveName = "${baseName}.${extension}"
 }
  
+task deploy(dependsOn: war, type:Copy){
+	println "tiene q  deploy jboss"
+	from('build/libs/'){
+		include '*.war'
+	}
+	into "$System.env.JBOSS_HOME"+"/standalone/deployments/"
+	 def target="${project.name}.war"
+}
