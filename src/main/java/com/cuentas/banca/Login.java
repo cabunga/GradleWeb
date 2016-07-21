@@ -4,11 +4,16 @@
 package com.cuentas.banca;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import com.cuentas.banca.dao.Cliente;
+import com.cuentas.banca.dao.Usuarios;
 
 /**
  * @author USUARIO
@@ -24,11 +29,24 @@ public class Login implements Serializable {
 	private String user;
 	private String pass;
 
-	public String autenticarse() {
-		System.out.print(user+"--------"+pass);		
-		// FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Por Favor Seleccione un Servicio."));
-		 return "success";
-			
+	public String autenticarse() {		
+		String existe = "";
+		Map<String, Cliente> map = Usuarios.getInstance().getUsuarios();
+		for (Map.Entry<String, Cliente> entry : map.entrySet()) {		
+			if (entry.getValue().getUsuario().equals(user)) {
+				HttpSession session = SessionUtils.getSession();
+				session.setAttribute("username", user);
+				existe = "success";
+			}
+		}
+		if (existe.isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(
+					"form:zona",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Usuario no valido."));
+		}
+		return existe;
+
 	}
 
 	/**

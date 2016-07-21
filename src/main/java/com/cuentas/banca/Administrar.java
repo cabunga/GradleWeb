@@ -5,15 +5,19 @@ package com.cuentas.banca;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.cuentas.banca.dao.Cliente;
+import com.cuentas.banca.dao.Cuenta;
+import com.cuentas.banca.dao.ManejadorCuentas;
+import com.cuentas.banca.dao.Usuarios;
 
 /**
- * @author USUARIO
+ * @author jimmy
  *
  */
 @ManagedBean
@@ -27,9 +31,29 @@ public class Administrar implements Serializable {
 	private String cuentaDestino;
 	private String valorActual;
 	private String valorRetiro;
-	Cliente cliente;
+	Cliente clienteOrigen;
+	private ManejadorCuentas manejadorCuentas;
+	String user;
+	@PostConstruct
+	public void init(){
+		user = (String) SessionUtils.getSession().getAttribute("username");
+	}
 	public void transferir() {
-		FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Transaccion realizada con exito."));
+		this.clienteOrigen = Usuarios.getInstance().getUsuarios().get(user);
+		this.cuentaOrigen=clienteOrigen.getCuenta().getNumero();
+		this.valorActual=String.valueOf(clienteOrigen.getCuenta().getSaldo());
+		Cliente clienteDestino = new Cliente();
+		Cuenta cuenta= new Cuenta();
+		cuenta.setNumero(this.cuentaDestino);
+		clienteDestino.setCuenta(cuenta);
+		try {
+			this.manejadorCuentas.transferir(this.clienteOrigen, clienteDestino, Double.valueOf(valorRetiro));
+			FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Transferencia exitosa."));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo realizar el proceso. Contacte con Administrador"));
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

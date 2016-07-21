@@ -23,6 +23,8 @@ public class Usuarios {
 		usuers.put(cliente.getUsuario(), cliente);
 
 		cliente = new Cliente();
+		cliente.setUsuario("admin");
+		cliente.setPassword("admin");
 		cuenta = new Cuenta();
 		cuenta.setSaldo(1000D);
 		cuenta.setFecha("2015-12-5");

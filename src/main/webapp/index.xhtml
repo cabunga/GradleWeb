@@ -15,11 +15,11 @@
  <p:messages id="messages" showDetail="true" autoUpdate="true" />
     <h:panelGrid id="grid" columns="3" cellpadding="2">
         <p:outputLabel for="idusuario" value="Usuarrio:" />
-        <p:inputText id="idusuario" required="true" />
+        <p:inputText id="idusuario" required="true" value="#{login.user}"/>
         <p:message for="idusuario" />
  
         <p:outputLabel for="idpass" value="Password:" />
-        <p:password id="idpass" required="true"/>
+        <p:password id="idpass" required="true" value="#{login.pass}"/>
         <p:message for="idpass" display="Password"/>
  
      </h:panelGrid>
