@@ -16,7 +16,7 @@ public class Usuarios {
 		cliente.setUsuario("jimmy");
 		cliente.setPassword("jimmy");
 		Cuenta cuenta = new Cuenta();
-		cuenta.setSaldo(1000D);
+		cuenta.setSaldo(10000D);
 		cuenta.setFecha("2015-12-5");
 		cuenta.setNumero("109434565221");	
 		cliente.setCuenta(cuenta);
@@ -26,7 +26,7 @@ public class Usuarios {
 		cliente.setUsuario("admin");
 		cliente.setPassword("admin");
 		cuenta = new Cuenta();
-		cuenta.setSaldo(1000D);
+		cuenta.setSaldo(10000D);
 		cuenta.setFecha("2015-12-5");
 		cuenta.setNumero("109434565443");
 		cliente.setCuenta(cuenta);

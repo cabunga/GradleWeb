@@ -41,8 +41,7 @@ public class Administrar implements Serializable {
 	String user;
 	
 	@PostConstruct
-	public void init(){
-		System.out.println("se ejecuto---------------------");
+	public void init(){	
 		user = (String) SessionUtils.getSession().getAttribute("username");
 		this.clienteOrigen = Usuarios.getInstance().getUsuarios().get(user);
 		this.cuentaOrigen=clienteOrigen.getCuenta().getNumero();

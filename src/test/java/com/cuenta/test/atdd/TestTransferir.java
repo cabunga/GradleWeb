@@ -57,47 +57,40 @@ public class TestTransferir {
 
 	@When("^ingreso el saldo a transferir de \"([^\"]*)\"$")
 	public void ingreso_el_saldo_a_transferir_de(String monto) throws Throwable {
-//		WebElement inputCuentaO = webDriver.findElement(By.xpath(".//*[contains(@id,'idcuentaOrigen')]"));
-//		
-//		inputCuentaO.sendKeys(cliente.getCuenta().getNumero().toString());
-//		WebElement inputMontoActual = webDriver.findElement(By.xpath(".//*[contains(@id,'idvalorActual')]"));
-//		inputMontoActual.sendKeys(String.valueOf(cliente.getCuenta().getSaldo()));
-//		
-//		
-//		Thread.sleep(1000);
-//		WebElement inputMonto = webDriver.findElement(By.xpath(".//*[contains(@id,'idmonto')]"));
-//		inputMonto.sendKeys(monto);
+		Thread.sleep(1000);
+		WebElement inputMonto = webDriver.findElement(By.xpath(".//*[contains(@id,'idmonto')]"));
+		inputMonto.clear();
+		inputMonto.sendKeys(monto);
 
 	}
 
 	@When("^ingreso la cuenta destino \"([^\"]*)\"$")
 	public void ingreso_la_cuenta_destino(String cuenta) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-//		WebElement input = webDriver.findElement(By.xpath(".//*[contains(@id,'idcuentaDestino')]"));
-//		input.sendKeys(cuenta);
+		WebElement input = webDriver.findElement(By.xpath(".//*[contains(@id,'idcuentaDestino')]"));
+		input.sendKeys(cuenta);
 
 	}
 
 	@When("^seleccion la opcion Transferir$")
 	public void seleccion_la_opcion_Transferir() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-//		WebElement button = webDriver.findElement(By.xpath(".//*[contains(@id,'idTransferir')]"));
-//		button.click(); 
+		WebElement button = webDriver.findElement(By.xpath(".//*[contains(@id,'idTransferir')]"));
+		button.click(); 
 		
 	}
 
 	@Then("^veo el mensaje \"([^\"]*)\"$")
 	public void veo_el_mensaje(String mensaje) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-//		WebElement element = webDriver.findElement(By.xpath(".//*[contains(@id,'messages')]"));
-		
-		//Assert.assertTrue(element.getText().contains(mensaje));
+		WebElement element = webDriver.findElement(By.xpath(".//*[contains(@id,'messages')]"));		
+		Assert.assertTrue(element.getText().contains(mensaje));
 	}
 
 	@Then("^mi nuevo saldo es \"([^\"]*)\"$")
 	public void mi_nuevo_saldo_es(String saldo) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-//		WebElement inputCuentaOrigen = webDriver.findElement(By.xpath(".//*[contains(@id,'idcuentaOrigen')]"));
-		//Assert.assertTrue(inputCuentaOrigen.getText().toString().equals(saldo));
+		// Write code here that turns the phrase above into concrete actions		
+		String saldoActual= webDriver.findElement(By.id("formadministrar:idvalorActual")).getAttribute("value");	
+		Assert.assertTrue((Double.valueOf(saldoActual)).equals(Double.valueOf(saldo)));
 	}
 }
