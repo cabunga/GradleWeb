@@ -2,30 +2,35 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<script name="jquery/jquery.js" library="primefaces"></script>
 </h:head>
 <body>
-<h3><h:outputText value="Banca Virtual" /></h3>
-<h:form id="maiLogin">
- <p:messages id="messages" showDetail="true" autoUpdate="false" />
-    <h:panelGrid id="grid" columns="3" cellpadding="2">
-        <p:outputLabel for="idusuario" value="Usuarrio:" />
-        <p:inputText id="idusuario" required="true" value="#{login.user}"/>
-        <p:message for="idusuario" />
- 
-        <p:outputLabel for="idpass" value="Password:" />
-        <p:password id="idpass" required="true" value="#{login.pass}"/>
-        <p:message for="idpass" display="Password"/>
- 
-     </h:panelGrid>
- <p:commandButton action="#{login.autenticarse}"
-							value="ingresar" ajax="false" id="idIngresar" >
-						</p:commandButton>
-</h:form>
+	<div id="header"></div>
+	<div id="container" align="center">
+		
+		<p:panel header="Banca Virtual" style="width:400px" id="panel">
+		<h:form id="maiLogin">
+			<p:messages id="messages" showDetail="true" autoUpdate="false" />
+			<h:panelGrid id="grid" columns="3" cellpadding="2">
+				<p:outputLabel for="idusuario" value="Usuarrio:" />
+				<p:inputText id="idusuario" required="true" value="#{login.user}" />
+				<p:message for="idusuario" />
+
+				<p:outputLabel for="idpass" value="Password:" />
+				<p:password id="idpass" required="true" value="#{login.pass}" />
+				<p:message for="idpass" display="Password" />
+
+			</h:panelGrid>
+			<p:commandButton action="#{login.autenticarse}" value="ingresar"
+				ajax="false" id="idIngresar">
+			</p:commandButton>
+		</h:form>
+		</p:panel>
+	</div>
 </body>
 </html>
