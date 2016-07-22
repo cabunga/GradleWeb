@@ -9,24 +9,25 @@
 </h:head>
 <body> 
 <h3><h:outputText value="Banca Virtual" /></h3>
-<h:form>
- <p:messages id="messages" showDetail="true" autoUpdate="true" />
+<f:event type="preRenderView" listener="#{administrar.init}"/>
+<h:form id="formadministrar">
+ <p:messages id="messages" showDetail="true" autoUpdate="f" />
     <h:panelGrid id="gridadmin" columns="3" cellpadding="2">
         <p:outputLabel for="idcuentaOrigen" value="Numero Cuenta Origen:" />
-        <p:inputText id="idcuentaOrigen" required="true" />
+        <p:inputText id="idcuentaOrigen" required="true" value="#{administrar.clienteOrigen.cuenta.numero}" />
         <p:message for="idcuentaOrigen" />
  
  		<p:outputLabel for="idvalorActual" value="Valor Actual:" />
-        <p:inputText id="idvalorActual" required="false"/>
+        <p:inputText id="idvalorActual" required="false" value="#{administrar.clienteOrigen.cuenta.saldo}"/>
         <p:message for="idvalorActual" />
         
         <p:outputLabel for="idcuentaDestino" value="Numero Cuenta Destino:" />
-        <p:inputText id="idcuentaDestino" required="true"/>
+        <p:inputText id="idcuentaDestino" required="true" value="#{administrar.cuentaDestino}"/>
         <p:message for="idcuentaDestino" display="Cuenta Destino"/>
  		
  		
         <p:outputLabel for="idmonto" value="Ingrese Valor:" />
-        <p:inputText id="idmonto" required="true"/>
+        <p:inputText id="idmonto" required="true" value="#{administrar.valorRetiro}"/>
         <p:message for="idmonto" display="Valor"/>
      </h:panelGrid>
  <p:commandButton action="#{administrar.transferir}"

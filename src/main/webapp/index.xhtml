@@ -11,8 +11,8 @@
 </h:head>
 <body>
 <h3><h:outputText value="Banca Virtual" /></h3>
-<h:form>
- <p:messages id="messages" showDetail="true" autoUpdate="true" />
+<h:form id="maiLogin">
+ <p:messages id="messages" showDetail="true" autoUpdate="false" />
     <h:panelGrid id="grid" columns="3" cellpadding="2">
         <p:outputLabel for="idusuario" value="Usuarrio:" />
         <p:inputText id="idusuario" required="true" value="#{login.user}"/>
@@ -24,7 +24,7 @@
  
      </h:panelGrid>
  <p:commandButton action="#{login.autenticarse}"
-							value="ingresar" ajax="false" id="idIngresar">
+							value="ingresar" ajax="false" id="idIngresar" >
 						</p:commandButton>
 </h:form>
 </body>

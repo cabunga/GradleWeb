@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
+
 import com.cuentas.banca.dao.Cliente;
 import com.cuentas.banca.dao.Cuenta;
 import com.cuentas.banca.dao.ManejadorCuentas;
@@ -30,24 +32,34 @@ public class Administrar implements Serializable {
 	private String cuentaOrigen;
 	private String cuentaDestino;
 	private String valorActual;
-	private String valorRetiro;
-	Cliente clienteOrigen;
+	private double valorRetiro;
+	private Cliente clienteOrigen;
+	private Cliente clienteDestino;
+	
+
 	private ManejadorCuentas manejadorCuentas;
 	String user;
+	
 	@PostConstruct
 	public void init(){
+		System.out.println("se ejecuto---------------------");
 		user = (String) SessionUtils.getSession().getAttribute("username");
-	}
-	public void transferir() {
 		this.clienteOrigen = Usuarios.getInstance().getUsuarios().get(user);
 		this.cuentaOrigen=clienteOrigen.getCuenta().getNumero();
 		this.valorActual=String.valueOf(clienteOrigen.getCuenta().getSaldo());
-		Cliente clienteDestino = new Cliente();
+		 RequestContext contexto = RequestContext
+					.getCurrentInstance();
+			//contexto.execute("dlgCrearCli.hide();");
+			contexto.update("formadministrar");
+	}
+	public void transferir() {
+		manejadorCuentas= new ManejadorCuentas();
+		 clienteDestino= new Cliente();
 		Cuenta cuenta= new Cuenta();
 		cuenta.setNumero(this.cuentaDestino);
 		clienteDestino.setCuenta(cuenta);
 		try {
-			this.manejadorCuentas.transferir(this.clienteOrigen, clienteDestino, Double.valueOf(valorRetiro));
+			this.manejadorCuentas.transferir(this.clienteOrigen, this.clienteDestino, this.valorRetiro);
 			FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Transferencia exitosa."));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage("form:zona", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo realizar el proceso. Contacte con Administrador"));
@@ -55,7 +67,30 @@ public class Administrar implements Serializable {
 		}
 		
 	}
-
+	/**
+	 * @return the clienteOrigen
+	 */
+	public Cliente getClienteOrigen() {
+		return clienteOrigen;
+	}
+	/**
+	 * @param clienteOrigen the clienteOrigen to set
+	 */
+	public void setClienteOrigen(Cliente clienteOrigen) {
+		this.clienteOrigen = clienteOrigen;
+	}
+	/**
+	 * @return the clienteDestino
+	 */
+	public Cliente getClienteDestino() {
+		return clienteDestino;
+	}
+	/**
+	 * @param clienteDestino the clienteDestino to set
+	 */
+	public void setClienteDestino(Cliente clienteDestino) {
+		this.clienteDestino = clienteDestino;
+	}
 	/**
 	 * @return the cuentaOrigen
 	 */
@@ -104,7 +139,7 @@ public class Administrar implements Serializable {
 	/**
 	 * @return the valorRetiro
 	 */
-	public String getValorRetiro() {
+	public double getValorRetiro() {
 		return valorRetiro;
 	}
 
@@ -112,7 +147,7 @@ public class Administrar implements Serializable {
 	 * @param valorRetiro
 	 *            the valorRetiro to set
 	 */
-	public void setValorRetiro(String valorRetiro) {
+	public void setValorRetiro(double valorRetiro) {
 		this.valorRetiro = valorRetiro;
 	}
 

@@ -3,6 +3,7 @@
  */
 package com.cuentas.banca;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.context.RequestContext;
 
 import com.cuentas.banca.dao.Cliente;
 import com.cuentas.banca.dao.Usuarios;
@@ -44,6 +47,17 @@ public class Login implements Serializable {
 					"form:zona",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
 							"Usuario no valido."));
+		}else{
+//			 RequestContext contexto = RequestContext
+//					.getCurrentInstance();
+//			//contexto.execute("dlgCrearCli.hide();");
+//			contexto.update("formadministrar");
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("administrar.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return existe;
 
