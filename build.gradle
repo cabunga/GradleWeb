@@ -39,5 +39,7 @@ war {
  
 test {
     systemProperty "webdriver", "chromedriver"	
+    exclude '**/steps/**'
+exclude '**/feature/**'
 }
 
