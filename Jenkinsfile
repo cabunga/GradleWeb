@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        bat '"Deploy UAT"'
+        bat 'echo "Deploy UAT"'
       }
     }
   }
