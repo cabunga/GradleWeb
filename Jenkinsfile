@@ -13,30 +13,12 @@ pipeline {
     }
     stage('CodeAnalytic') {
       steps {
-        parallel(
-          "CodeAnalytic": {
-            bat 'echo "sonar"'
-            
-          },
-          "Email": {
-            echo 'Envio Correo'
-            
-          }
-        )
+        bat 'echo "sonar"'
       }
     }
     stage('Deploy') {
       steps {
-        parallel(
-          "Deploy": {
-            bat 'echo "Deploy UAT"'
-            
-          },
-          "Rollback": {
-            echo 'En caso de Fallo'
-            
-          }
-        )
+        bat 'echo "Deploy UAT"'
       }
     }
   }
