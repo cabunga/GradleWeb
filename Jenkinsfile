@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        bat 'echo "test"'
+        bat(script: 'gradle test', returnStatus: true)
       }
     }
     stage('CodeAnalytic') {
